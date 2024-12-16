@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MuzeimModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Exhibitions">
+          <Key>
+            <PropertyRef Name="ExhibitionID" />
+          </Key>
+          <Property Name="ExhibitionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Exhibits">
+          <Key>
+            <PropertyRef Name="ExhibitID" />
+          </Key>
+          <Property Name="ExhibitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Artist" Type="nvarchar" MaxLength="100" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ExhibitionID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Exhibits__Exhibi__267ABA7A">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="ExhibitionID" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="ExhibitionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MuzeimModelContainer">
+          <EntitySet Name="Exhibitions" EntityType="Self.Exhibitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exhibits" EntityType="Self.Exhibits" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Exhibits__Exhibi__267ABA7A" Association="Self.FK__Exhibits__Exhibi__267ABA7A">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MuzeimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Exhibitions">
+          <Key>
+            <PropertyRef Name="ExhibitionID" />
+          </Key>
+          <Property Name="ExhibitionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Exhibits" Relationship="Self.FK__Exhibits__Exhibi__267ABA7A" FromRole="Exhibitions" ToRole="Exhibits" />
+        </EntityType>
+        <EntityType Name="Exhibits">
+          <Key>
+            <PropertyRef Name="ExhibitID" />
+          </Key>
+          <Property Name="ExhibitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Artist" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ExhibitionID" Type="Int32" />
+          <NavigationProperty Name="Exhibitions" Relationship="Self.FK__Exhibits__Exhibi__267ABA7A" FromRole="Exhibits" ToRole="Exhibitions" />
+        </EntityType>
+        <Association Name="FK__Exhibits__Exhibi__267ABA7A">
+          <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+          <End Role="Exhibits" Type="Self.Exhibits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exhibitions">
+              <PropertyRef Name="ExhibitionID" />
+            </Principal>
+            <Dependent Role="Exhibits">
+              <PropertyRef Name="ExhibitionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuzeimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Exhibitions" EntityType="Self.Exhibitions" />
+          <EntitySet Name="Exhibits" EntityType="Self.Exhibits" />
+          <AssociationSet Name="FK__Exhibits__Exhibi__267ABA7A" Association="Self.FK__Exhibits__Exhibi__267ABA7A">
+            <End Role="Exhibitions" EntitySet="Exhibitions" />
+            <End Role="Exhibits" EntitySet="Exhibits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MuzeimModelContainer" CdmEntityContainer="MuzeimEntities">
+          <EntitySetMapping Name="Exhibitions">
+            <EntityTypeMapping TypeName="MuzeimModel.Exhibitions">
+              <MappingFragment StoreEntitySet="Exhibitions">
+                <ScalarProperty Name="ExhibitionID" ColumnName="ExhibitionID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exhibits">
+            <EntityTypeMapping TypeName="MuzeimModel.Exhibits">
+              <MappingFragment StoreEntitySet="Exhibits">
+                <ScalarProperty Name="ExhibitID" ColumnName="ExhibitID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExhibitionID" ColumnName="ExhibitionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
